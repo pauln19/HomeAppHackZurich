@@ -129,7 +129,7 @@ angular.module('starter.controllers', [])
       case 'Door':
         return $http({
           method: 'GET',
-          url: 'http://172.31.0.191:8080/create?identifier=6Rrbr9&type=door&name='+"subselection",
+          url: 'http://172.31.0.191:8080/create?identifier=6Rrbr9&type=door&name='+subselection,
         }).success(function(data){
           console.log(data.data);
           $scope.data = data.data;
@@ -143,7 +143,7 @@ angular.module('starter.controllers', [])
       case 'Stove':
         return $http({
           method: 'GET',
-          url: 'http://172.31.0.191:8080/create?identifier=ASc&type=stove&name='+"subselection",
+          url: 'http://172.31.0.191:8080/create?identifier=ASc&type=stove&name='+subselection,
         }).success(function(data){
           console.log(data.data);
           $scope.data = data.data;
@@ -156,7 +156,7 @@ angular.module('starter.controllers', [])
       case 'Drawer':
         return $http({
           method: 'GET',
-          url: 'http://172.31.0.191:8080/create?identifier=vS3&type=drawer&name='+"subselection",
+          url: 'http://172.31.0.191:8080/create?identifier=vS3&type=drawer&name='+subselection,
         }).success(function(data){
           console.log(data.data);
           $scope.data = data.data;

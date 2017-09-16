@@ -1,10 +1,22 @@
 <ion-view view-title="Object">
   <ion-content>
     <ion-list>
-      <ion-toggle ng-repeat="control in controls" href="#/app/controls/{{control.id}}" ng-model="status" ng-change="activate({{control.id}},status)">
+      <ion-toggle ng-model="status0" ng-change="activate(0,status0)" ng-disabled="status1">
+        <img src="img/{{controls[0].title}}.png" width="40"/>
+        {{controls[0].title}}
+      </ion-toggle>
+      <ion-toggle ng-model="status1" ng-change="activate(1,status1)" ng-disabled="status0">
+        <img src="img/{{controls[1].title}}.png" width="40"/>
+        {{controls[1].title}}
+      </ion-toggle>
+      <ion-toggle ng-model="status2" ng-change="activate(2,status2)">
+        <img src="img/{{controls[2].title}}.png" width="40"/>
+        {{controls[2].title}}
+      </ion-toggle>
+      <!-- <ion-toggle ng-repeat="control in controls" ng-model="status" ng-change="activate({{control.id}},status)">
         <img src="img/{{control.title}}.png" width="40"/>
         {{control.title}}
-      </ion-toggle>
+      </ion-toggle> -->
     </ion-list>
   </ion-content>
 </ion-view>

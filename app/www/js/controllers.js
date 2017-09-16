@@ -12,6 +12,8 @@ angular.module('starter.controllers', [])
   // Form data for the login modal
   $scope.loginData = {};
 
+  $scope.image = {};
+
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -61,10 +63,11 @@ angular.module('starter.controllers', [])
     if (id == 1 && status == true){
       return $http({
         method: 'GET',
-        url: 'http://localhost:8080',
+        url: 'http://localhost:8080/camera',
       }).success(function(data){
-        console.log(data);
-        return data;
+        console.log(data.data);
+        $scope.image = data.data;
+        return data.data;
       }).error(function(){
         alert("Error");
         return null ;

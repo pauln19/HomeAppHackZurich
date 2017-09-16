@@ -1,5 +1,6 @@
 package com.hackzurich.kidssafety.controller;
 
+import com.hackzurich.kidssafety.model.Device;
 import com.hackzurich.kidssafety.repository.DeviceRepository;
 import com.hackzurich.kidssafety.service.HomeApp;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,43 +9,42 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 
 @RestController
 @CrossOrigin
 public class Controller {
-    final String HOST = "172.31.0.225";
-    final int PORT = 4223;
 
     private DeviceRepository deviceRepository;
-    private HomeApp homeApp = new HomeApp(deviceRepository, HOST, PORT);
+    private HomeApp homeApp;
 
     public Controller(HomeApp homeApp, DeviceRepository deviceRepository) {
-        this.homeApp = homeApp;
         this.deviceRepository = deviceRepository;
+        this.homeApp = new HomeApp(deviceRepository);
     }
 
     // create new object
     @RequestMapping("/create")
-    public void createObject
+    public Iterable<Device> createObject
     (@RequestParam String identifier, @RequestParam String type, @RequestParam String name) {
         homeApp.createObject(identifier, type, name);
+        return deviceRepository.findAll();
     }
 
     @RequestMapping("/edit")
-    public void editObject
-            (@RequestParam String identifier, @RequestParam Hashtable<String, Boolean> state) {
-        homeApp.editObject(identifier, state);
+    public Iterable<Device> editObject
+            (@RequestParam HashMap<String, Object> params) {
+        homeApp.editObject(params);
+        return deviceRepository.findAll();
     }
 
     // take an image of the front door
     @RequestMapping("/camera")
-    public BufferedImage show_image() {
-        BufferedImage image = homeApp.getImage();
-        return image;
+    public BufferedImage showImage() {
+        return homeApp.getImage();
     }
-
 
 
 }

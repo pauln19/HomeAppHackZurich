@@ -58,7 +58,7 @@ public class HomeApp {
             deviceRepository.setElderlySecurityEnabled(Boolean.parseBoolean((String) params.get("elderlySecurityEnabled")), (String) params.get("identifier"));
             deviceRepository.setChildSecurityEnabled(Boolean.parseBoolean((String) params.get("childSecurityEnabled")), (String) params.get("identifier"));
 
-            toggleSecurity((String) params.get("identifier"), false);
+            toggleSecurity((String) params.get("identifier"), Boolean.parseBoolean((String) params.get("childSecurityEnabled")));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,16 +68,35 @@ public class HomeApp {
         return deviceRepository.getDevice(identifier);
     }
 
+    public IPConnection getIpcon() {
+        return ipcon;
+    }
+
     public void toggle_servo(BrickServo servo, boolean toggle) {
         short SERVO_NUMBER = 6;
         try {
             if (toggle) {
-            short position = servo.getPosition((short) 6); // ???
+                servo.enable(SERVO_NUMBER);
                 servo.setPosition(SERVO_NUMBER, (short) 8000);
             } else {
                 servo.setPosition(SERVO_NUMBER, (short) -8000);
+
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void toggle_servo_block(BrickServo servo, boolean toggle) {
+        short SERVO_NUMBER = 6;
+        try {
+            if (toggle) {
+                servo.enable(SERVO_NUMBER);
+            } else {
+                servo.disable(SERVO_NUMBER);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -89,6 +108,7 @@ public class HomeApp {
                 led.setRGBValue((short) 255, (short) 0, (short) 0);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -97,11 +117,12 @@ public class HomeApp {
         String uid;
         BrickServo servo;
         Device device = getObject(identifier);
+
         switch (device.getType()) {
             case "Entrance":
                 uid = "6Rrbr9";
                 servo = new BrickServo(uid, ipcon);
-                toggle_servo(servo, toggle);
+                toggle_servo_block(servo, toggle);
                 break;
             case "Door":
                 uid = "6Rrbr9";
@@ -116,6 +137,7 @@ public class HomeApp {
             case "Stove":
                 uid = "ASc";
                 BrickletRGBLED rgbLedBricklet = new BrickletRGBLED(uid, ipcon);
+
                 toggle_led(rgbLedBricklet, toggle);
                 break;
             default:

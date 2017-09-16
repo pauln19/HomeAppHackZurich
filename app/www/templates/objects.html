@@ -1,7 +1,7 @@
 <ion-view view-title="Objects">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="object in objects" class="item-thumbnail-left" href="#/app/objects/{{object.id}}">
+      <ion-item ng-repeat="object in objects" class="item-thumbnail-left" ng-click="getControls({{object.id}})" href="#/app/objects/{{object.id}}">
         <img src="img/{{object.title}}.png"/>
         {{object.title}}
         <a>

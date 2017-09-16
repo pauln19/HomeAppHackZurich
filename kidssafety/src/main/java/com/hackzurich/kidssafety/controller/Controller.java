@@ -59,5 +59,9 @@ public class Controller {
         return homeApp.getImage();
     }
 
+    @RequestMapping("/delete")
+    public boolean delete(@RequestParam String id) {
+        return homeApp.deleteObject(id);
+    }
 
 }

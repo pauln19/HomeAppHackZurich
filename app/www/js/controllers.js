@@ -174,8 +174,53 @@ angular.module('starter.controllers', [])
 .controller('RemoveCtrl', function($scope, $stateParams) {
 
   $scope.remove = function(item) {
-  var index = $scope.objects.indexOf(item);
-  $scope.bdays.splice(index, 1);
+  Objects.remove(item);
+
+  switch (item.title) {
+    case 'Door':
+      return $http({
+        method: 'GET',
+        url: 'http://172.31.0.191:8080/delete?id=6Rrbr9',
+      }).success(function(data){
+        console.log(data.data);
+        $scope.data = data.data;
+        return data.data;
+      }).error(function(){
+        alert("Error");
+        return null;
+      });
+      break;
+
+    case 'Stove':
+      return $http({
+        method: 'GET',
+        url: 'http://172.31.0.191:8080/delete?id=ASc',
+      }).success(function(data){
+        console.log(data.data);
+        $scope.data = data.data;
+        return data.data;
+      }).error(function(){
+        alert("Error");
+        return null;
+      });
+      break;
+    case 'Drawer':
+      return $http({
+        method: 'GET',
+        url: 'http://172.31.0.191:8080/delete?id=vS3',
+      }).success(function(data){
+        console.log(data.data);
+        $scope.data = data.data;
+        return data.data;
+      }).error(function(){
+        alert("Error");
+        return null;
+      });
+      break;
+
+  }
+
+
 }
 
 });

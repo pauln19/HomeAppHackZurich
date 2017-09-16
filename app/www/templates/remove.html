@@ -1,13 +1,17 @@
 <ion-view view-title="Remove">
+  <div class="bar bar-subheader">
+  <h2 class="title">Select what you want to delete</h2>
+</div>
   <ion-content>
     <ion-list>
-    <ion-item ng-repeat="object in objects" class="item-thumbnail-left" ng-click="remove(object)" href="#/app/objects">
-      <img src="img/{{object.title}}.png"/>
-      {{object.title}}
-      <a>
-        {{object.subtitle}}
-      </a>
-    </ion-item>
-  </ion-list>
+      <ion-item ng-repeat="object in objects" class="item-thumbnail-left" ng-click="remove({{object}})" href="#/app/objects">
+        <img src="img/{{object.title}}.png"/>
+        {{object.title}}
+        <a>
+          {{object.subtitle}}
+        </a>
+      </ion-item>
+      <a class="button button-block button-assertive" href="#/app/objects">Remove</a>
+    </ion-list>
   </ion-content>
 </ion-view>

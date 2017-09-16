@@ -41,8 +41,8 @@ public class Controller {
     // create new object
     @RequestMapping("/create")
     public Iterable<Device> createObject
-    (@RequestParam String identifier, @RequestParam String type, @RequestParam String name) {
-        homeApp.createObject(identifier, type, name);
+    (@RequestParam String id, @RequestParam String type, @RequestParam String name) {
+        homeApp.createObject(id, type, name);
         return deviceRepository.findAll();
     }
 
@@ -59,5 +59,9 @@ public class Controller {
         return homeApp.getImage();
     }
 
+    @RequestMapping("/delete")
+    public boolean delete(@RequestParam String id) {
+        return homeApp.deleteObject(id);
+    }
 
 }

@@ -6,14 +6,11 @@ import com.hackzurich.kidssafety.tinkerforge.BrickServo;
 import com.hackzurich.kidssafety.tinkerforge.BrickletRGBLED;
 import com.hackzurich.kidssafety.tinkerforge.IPConnection;
 import com.hopding.jrpicam.RPiCamera;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import javafx.beans.binding.ObjectExpression;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 @Service
 public class HomeApp {
@@ -63,6 +60,17 @@ public class HomeApp {
             e.printStackTrace();
         }
     }
+
+    public boolean deleteObject(String id) {
+        try {
+            deviceRepository.delete(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } return false;
+
+    }
+
 
     public Device getObject(String identifier) {
         return deviceRepository.getDevice(identifier);

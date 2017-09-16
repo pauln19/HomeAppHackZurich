@@ -54,11 +54,11 @@ public class HomeApp {
 
     public void editObject(HashMap<String, Object> params) {
         try {
-            deviceRepository.setPowerEnabled(Boolean.parseBoolean((String) params.get("powerEnabled")), (String) params.get("identifier"));
-            deviceRepository.setElderlySecurityEnabled(Boolean.parseBoolean((String) params.get("elderlySecurityEnabled")), (String) params.get("identifier"));
-            deviceRepository.setChildSecurityEnabled(Boolean.parseBoolean((String) params.get("childSecurityEnabled")), (String) params.get("identifier"));
+            deviceRepository.setPowerEnabled(Boolean.parseBoolean((String) params.get("powerEnabled")), (String) params.get("id"));
+            deviceRepository.setElderlySecurityEnabled(Boolean.parseBoolean((String) params.get("elderlySecurityEnabled")), (String) params.get("id"));
+            deviceRepository.setChildSecurityEnabled(Boolean.parseBoolean((String) params.get("childSecurityEnabled")), (String) params.get("id"));
 
-            toggleSecurity((String) params.get("identifier"), Boolean.parseBoolean((String) params.get("childSecurityEnabled")));
+            toggleSecurity((String) params.get("id"), Boolean.parseBoolean((String) params.get("childSecurityEnabled")));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -119,22 +119,22 @@ public class HomeApp {
         Device device = getObject(identifier);
 
         switch (device.getType()) {
-            case "Entrance":
+            case "entrance":
                 uid = "6Rrbr9";
                 servo = new BrickServo(uid, ipcon);
                 toggle_servo_block(servo, toggle);
                 break;
-            case "Door":
+            case "door":
+                uid = "6Rrbr9";
+                servo = new BrickServo(uid, ipcon);
+                toggle_servo_block(servo, toggle);
+                break;
+            case "drawer":
                 uid = "6Rrbr9";
                 servo = new BrickServo(uid, ipcon);
                 toggle_servo(servo, toggle);
                 break;
-            case "Drawer":
-                uid = "6Rrbr9";
-                servo = new BrickServo(uid, ipcon);
-                toggle_servo(servo, toggle);
-                break;
-            case "Stove":
+            case "stove":
                 uid = "ASc";
                 BrickletRGBLED rgbLedBricklet = new BrickletRGBLED(uid, ipcon);
 

@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.awt.image.BufferedImage;
+
 import javax.xml.bind.annotation.XmlRegistry;
 
 @RestController
 @CrossOrigin
-public class HelloWorld {
+public class Controller {
 
     @Autowired
     HomeApp homeApp;
@@ -28,11 +30,9 @@ public class HelloWorld {
     }
 
     @RequestMapping("/camera")
-    public BufferedImage get_image() {
-        homeApp.take_image();
+    public BufferedImage show_image() {
         BufferedImage image = homeApp.get_image();
         return image;
     }
-
 
 }

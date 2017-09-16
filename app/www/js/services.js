@@ -6,13 +6,6 @@ angular.module('starter.services', [])
   .factory('Objects', function () {
 
     var objects = [
-      { title: 'Door', subtitle: 'Bedroom', id: 1, power: false, childProtection: false, elderProtection: false
-      },
-      { title: 'Door', subtitle: 'Living room', id: 2, power: false, childProtection: false, elderProtection: false
-      },
-      { title: 'Stove', subtitle: 'Kitchen', id: 3, power: false, childProtection: false, elderProtection: false
-      },
-      { title: 'Drawer', subtitle: 'Kitchen', id: 4, power: false, childProtection: false, elderProtection: false}
     ];
 
     var object;

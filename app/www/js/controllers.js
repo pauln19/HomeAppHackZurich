@@ -65,7 +65,7 @@ angular.module('starter.controllers', [])
       case 0:
         return $http({
           method: 'GET',
-          url: 'http://172.31.0.191/edit?identifier=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+          url: 'http://172.31.0.191:8080/edit?identifier=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
         }).success(function(data){
           console.log(data.data);
           $scope.data = data.data;
@@ -79,7 +79,7 @@ angular.module('starter.controllers', [])
       case 1:
         return $http({
           method: 'GET',
-          url: 'http://172.31.0.191/edit?identifier=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+          url: 'http://172.31.0.191:8080/edit?identifier=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
         }).success(function(data){
           console.log(data.data);
           $scope.data = data.data;
@@ -92,7 +92,7 @@ angular.module('starter.controllers', [])
       case 2:
         return $http({
           method: 'GET',
-          url: 'http://localhost:8080/edit?identifier=ASc&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+          url: 'http://172.31.0.191:8080/edit?identifier=ASc&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
         }).success(function(data){
           console.log(data.data);
           $scope.data = data.data;
@@ -106,7 +106,7 @@ angular.module('starter.controllers', [])
         case 3:
           return $http({
             method: 'GET',
-            url: 'http://localhost:8080/edit?identifier=vS3&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+            url: 'http://172.31.0.191:8080/edit?identifier=vS3&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
           }).success(function(data){
             console.log(data.data);
             $scope.data = data.data;
@@ -126,10 +126,10 @@ angular.module('starter.controllers', [])
     Objects.add(selection, subselection);
 
     switch (selection) {
-      case Door:
+      case 'Door':
         return $http({
           method: 'GET',
-          url: 'http://localhost:8080/create?identifier=6Rrbr9&type=door&name='+"subselection",
+          url: 'http://172.31.0.191:8080/create?identifier=6Rrbr9&type=door&name='+"subselection",
         }).success(function(data){
           console.log(data.data);
           $scope.data = data.data;
@@ -140,10 +140,10 @@ angular.module('starter.controllers', [])
         });
         break;
 
-      case Stove:
+      case 'Stove':
         return $http({
           method: 'GET',
-          url: 'http://localhost:8080/create?identifier=ASc&type=stove&name='+"subselection",
+          url: 'http://172.31.0.191:8080/create?identifier=ASc&type=stove&name='+"subselection",
         }).success(function(data){
           console.log(data.data);
           $scope.data = data.data;
@@ -153,10 +153,10 @@ angular.module('starter.controllers', [])
           return null;
         });
         break;
-      case Drawer:
+      case 'Drawer':
         return $http({
           method: 'GET',
-          url: 'http://localhost:8080/create?identifier=vS3&type=drawer&name='+"subselection",
+          url: 'http://172.31.0.191:8080/create?identifier=vS3&type=drawer&name='+"subselection",
         }).success(function(data){
           console.log(data.data);
           $scope.data = data.data;

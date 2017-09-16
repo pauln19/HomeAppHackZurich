@@ -29,6 +29,7 @@ public class Controller {
         return "I am at home!";
     }
 
+    // take an image of the front door
     @RequestMapping("/camera")
     public BufferedImage show_image() {
         BufferedImage image = homeApp.get_image();

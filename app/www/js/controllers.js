@@ -58,18 +58,65 @@ angular.module('starter.controllers', [])
 
   $scope.activate = function(id2,status){
     Objects.editControls(Objects.object.id,id2);
-    if (id2 === 0 && Objects.object.power === true){
-      return $http({
-        method: 'GET',
-        url: 'http://localhost:8080/camera',
-      }).success(function(data){
-        console.log(data.data);
-        $scope.image = data.data;
-        return data.data;
-      }).error(function(){
-        alert("Error");
-        return null ;
-      });
+    var p = Objects.object.power.toString();
+    var e = Objects.object.elderProtection.toString();
+    var c = Objects.object.childProtection.toString();
+    switch (id2) {
+      case 0:
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:8080/edit?identifier=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+        }).success(function(data){
+          console.log(data.data);
+          $scope.data = data.data;
+          return data.data;
+        }).error(function(){
+          alert("Error");
+          return null;
+        });
+        break;
+
+      case 1:
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:8080/edit?identifier=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+        }).success(function(data){
+          console.log(data.data);
+          $scope.data = data.data;
+          return data.data;
+        }).error(function(){
+          alert("Error");
+          return null;
+        });
+        break;
+      case 2:
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:8080/edit?identifier=ASc&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+        }).success(function(data){
+          console.log(data.data);
+          $scope.data = data.data;
+          return data.data;
+        }).error(function(){
+          alert("Error");
+          return null;
+        });
+        break;
+
+        case 3:
+          return $http({
+            method: 'GET',
+            url: 'http://localhost:8080/edit?identifier=vS3&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+          }).success(function(data){
+            console.log(data.data);
+            $scope.data = data.data;
+            return data.data;
+          }).error(function(){
+            alert("Error");
+            return null;
+          });
+          break;
+
     }
   }
 })

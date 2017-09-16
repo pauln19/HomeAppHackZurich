@@ -1,13 +1,31 @@
 <ion-view view-title="Add">
   <ion-content>
-    <ion-list>
-    <ion-item ng-repeat="object in objects" class="item-thumbnail-left" href="#/app/objects/{{object.id}}">
-      <img src="img/{{object.title}}.png"/>
-      {{object.title}}
-      <a>
-        {{object.subtitle}}
-      </a>
-    </ion-item>
-  </ion-list>
+    <div class="list">
+
+      <label class="item item-input item-select">
+        <div class="input-label">
+          New smart object
+        </div>
+        <select ng-model="selection">
+          <option>Door</option>
+          <option selected>Oven</option>
+          <option>Drawer</option>
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Room
+        </div>
+        <select ng-model="subselection">
+          <option>Kitchen</option>
+          <option selected>Bedroom</option>
+          <option>Living room</option>
+        </select>
+      </label>
+    </div>
+
+<a class="button button-block button-balanced" href="#/app/objects" ng-click="add(selection, subselection)">Confirm</a>
+<a class="button button-block button-assertive" href="#/app/objects">Cancel</a>
+
   </ion-content>
 </ion-view>

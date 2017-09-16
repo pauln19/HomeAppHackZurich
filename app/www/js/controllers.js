@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, Objects) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -41,24 +41,24 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ObjectsCtrl', function($scope) {
-  $scope.objects = [
-    { title: 'Door', subtitle: 'Bedroom', id: 1 },
-    { title: 'Door', subtitle: 'Living room', id: 2},
-    { title: 'Stove', subtitle: 'Kitchen', id: 3 },
-    { title: 'Drawer', subtitle: 'Kitchen', id: 4 }
-  ];
+.controller('ObjectsCtrl', function($scope, Objects) {
+  $scope.objects = Objects.all();
+
+  $scope.object = Objects.object;
+
+  $scope.getControls = function(id){
+    $scope.objectId = id;
+    $scope.controls = Objects.getControls(id);
+    console.log($scope.controls);
+    return null;
+  }
 })
 
-.controller('ObjectCtrl', function($scope, $stateParams, $http) {
-  $scope.controls = [
-    { title: 'Power', id: 1 },
-    { title: 'Child protection', id: 2},
-    { title: 'Elder protection', id: 3 }
-  ];
+.controller('ObjectCtrl', function($scope, $stateParams, $http, Objects) {
 
-  $scope.activate = function(id,status){
-    if (id == 1 && status == true){
+  $scope.activate = function(id2,status){
+    Objects.editControls(Objects.object.id,id2);
+    if (id2 === 0 && Objects.object.power === true){
       return $http({
         method: 'GET',
         url: 'http://localhost:8080/camera',
@@ -74,13 +74,10 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('AddCtrl', function($scope, $stateParams) {
-  $scope.objects = [
-    { title: 'Door', subtitle: 'Bedroom', id: 1 },
-    { title: 'Door', subtitle: 'Living room', id: 2},
-    { title: 'Stove', subtitle: 'Kitchen', id: 3 },
-    { title: 'Drawer', subtitle: 'Kitchen', id: 4 }
-  ];
+.controller('AddCtrl', function($scope, $stateParams, Objects) {
+  $scope.add = function(selection, subselection) {
+    Objects.add(selection, subselection);
+  }
 })
 
 .controller('RemoveCtrl', function($scope, $stateParams) {

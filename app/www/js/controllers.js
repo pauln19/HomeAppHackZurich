@@ -41,16 +41,34 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
+.controller('ObjectsCtrl', function($scope) {
+  $scope.objects = [
+    { title: 'Main Door', id: 1 },
+    { title: 'Secondary Door', id: 2},
+    { title: 'Stove', id: 3 },
+    { title: 'Drawer', id: 4 }
   ];
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('ObjectCtrl', function($scope, $stateParams, $http) {
+  $scope.controls = [
+    { title: 'Power', id: 1 },
+    { title: 'Child protection', id: 2},
+    { title: 'Elder protection', id: 3 }
+  ];
+
+  $scope.activate = function(id,status){
+    if (id == 1 && status == true){
+      return $http({
+        method: 'GET',
+        url: 'https://www.google.ch/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+      }).success(function(data){
+        console.log('http request done');
+        return data;
+      }).error(function(){
+        alert("Error");
+        return null ;
+      });
+    }
+  }
 });

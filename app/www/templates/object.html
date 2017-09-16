@@ -1,0 +1,10 @@
+<ion-view view-title="Object">
+  <ion-content>
+    <ion-list>
+      <ion-toggle ng-repeat="control in controls" href="#/app/controls/{{control.id}}" ng-model="status" ng-change="activate({{control.id}},status)">
+        <img src="img/{{control.title}}.png" width="40"/>
+        {{control.title}}
+      </ion-toggle>
+    </ion-list>
+  </ion-content>
+</ion-view>

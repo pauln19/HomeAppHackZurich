@@ -61,9 +61,9 @@ angular.module('starter.controllers', [])
     if (id == 1 && status == true){
       return $http({
         method: 'GET',
-        url: 'https://www.google.ch/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+        url: 'http://localhost:8080',
       }).success(function(data){
-        console.log('http request done');
+        console.log(data);
         return data;
       }).error(function(){
         alert("Error");

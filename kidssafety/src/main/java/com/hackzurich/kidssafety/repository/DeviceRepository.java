@@ -7,24 +7,29 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
+
 @Repository
 public interface DeviceRepository extends CrudRepository<Device, String>{
 
     @Override
     Iterable<Device> findAll();
 
+    @Transactional
     @Modifying
-    @Query("update childSecurityEnabled set childSecurityEnabled = :childSecurityEnabled where id = :id")
-    int setChildSecurityEnabled(@Param("childSecurityEnabled") boolean childSecurityEnabled, @Param("id") String id);
+    @Query("update Device d set d.childSecurityEnabled = :childSecurityEnabled where d.id = :id")
+    void setChildSecurityEnabled(@Param("childSecurityEnabled") boolean childSecurityEnabled, @Param("id") String id);
+
+    @Transactional
+    @Modifying
+    @Query("update Device d set d.elderlySecurityEnabled = :elderlySecurityEnabled where d.id = :id")
+    void setElderlySecurityEnabled(@Param("elderlySecurityEnabled") boolean elderlySecurityEnabled, @Param("id") String id);
 
     @Modifying
-    @Query("update elderlySecurityEnabled set elderlySecurityEnabled = :elderlySecurityEnabled where id = :id")
-    int setElderlySecurityEnabled(@Param("elderlySecurityEnabled") boolean elderlySecurityEnabled, @Param("id") String id);
+    @Transactional
+    @Query("update Device d set d.powerEnabled = :powerEnabled where d.id = :id")
+    void setPowerEnabled(@Param("powerEnabled") boolean powerEnabled, @Param("id") String id);
 
-    @Modifying
-    @Query("update state set state = :state where id = :id")
-    int setPowerEnabled(@Param("state") boolean state, @Param("id") String id);
-
-    @Query("select Device device where id = :id")
+    @Query("select d from Device d where id = :id")
     Device getDevice(@Param("id") String id);
 }

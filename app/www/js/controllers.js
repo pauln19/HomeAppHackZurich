@@ -58,25 +58,116 @@ angular.module('starter.controllers', [])
 
   $scope.activate = function(id2,status){
     Objects.editControls(Objects.object.id,id2);
-    if (id2 === 0 && Objects.object.power === true){
-      return $http({
-        method: 'GET',
-        url: 'http://localhost:8080/camera',
-      }).success(function(data){
-        console.log(data.data);
-        $scope.image = data.data;
-        return data.data;
-      }).error(function(){
-        alert("Error");
-        return null ;
-      });
+    var p = Objects.object.power.toString();
+    var e = Objects.object.elderProtection.toString();
+    var c = Objects.object.childProtection.toString();
+    switch (id2) {
+      case 0:
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:8080/edit?identifier=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+        }).success(function(data){
+          console.log(data.data);
+          $scope.data = data.data;
+          return data.data;
+        }).error(function(){
+          alert("Error");
+          return null;
+        });
+        break;
+
+      case 1:
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:8080/edit?identifier=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+        }).success(function(data){
+          console.log(data.data);
+          $scope.data = data.data;
+          return data.data;
+        }).error(function(){
+          alert("Error");
+          return null;
+        });
+        break;
+      case 2:
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:8080/edit?identifier=ASc&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+        }).success(function(data){
+          console.log(data.data);
+          $scope.data = data.data;
+          return data.data;
+        }).error(function(){
+          alert("Error");
+          return null;
+        });
+        break;
+
+        case 3:
+          return $http({
+            method: 'GET',
+            url: 'http://localhost:8080/edit?identifier=vS3&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+          }).success(function(data){
+            console.log(data.data);
+            $scope.data = data.data;
+            return data.data;
+          }).error(function(){
+            alert("Error");
+            return null;
+          });
+          break;
+
     }
   }
 })
 
-.controller('AddCtrl', function($scope, $stateParams, Objects) {
+.controller('AddCtrl', function($scope, $stateParams, Objects, $http) {
   $scope.add = function(selection, subselection) {
     Objects.add(selection, subselection);
+    
+    switch (selection) {
+      case Door:
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:8080/create?identifier=6Rrbr9&type=door&name='+"subselection",
+        }).success(function(data){
+          console.log(data.data);
+          $scope.data = data.data;
+          return data.data;
+        }).error(function(){
+          alert("Error");
+          return null;
+        });
+        break;
+
+      case Stove:
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:8080/create?identifier=ASc&type=stove&name='+"subselection",
+        }).success(function(data){
+          console.log(data.data);
+          $scope.data = data.data;
+          return data.data;
+        }).error(function(){
+          alert("Error");
+          return null;
+        });
+        break;
+      case Drawer:
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:8080/create?identifier=vS3&type=drawer&name='+"subselection",
+        }).success(function(data){
+          console.log(data.data);
+          $scope.data = data.data;
+          return data.data;
+        }).error(function(){
+          alert("Error");
+          return null;
+        });
+        break;
+
+    }
   }
 })
 

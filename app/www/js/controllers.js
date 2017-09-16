@@ -12,6 +12,8 @@ angular.module('starter.controllers', [])
   // Form data for the login modal
   $scope.loginData = {};
 
+  $scope.image = {};
+
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -43,10 +45,10 @@ angular.module('starter.controllers', [])
 
 .controller('ObjectsCtrl', function($scope) {
   $scope.objects = [
-    { title: 'Main Door', id: 1 },
-    { title: 'Secondary Door', id: 2},
-    { title: 'Stove', id: 3 },
-    { title: 'Drawer', id: 4 }
+    { title: 'Door', subtitle: 'Bedroom', id: 1 },
+    { title: 'Door', subtitle: 'Living room', id: 2},
+    { title: 'Stove', subtitle: 'Kitchen', id: 3 },
+    { title: 'Drawer', subtitle: 'Kitchen', id: 4 }
   ];
 })
 
@@ -61,14 +63,33 @@ angular.module('starter.controllers', [])
     if (id == 1 && status == true){
       return $http({
         method: 'GET',
-        url: 'https://www.google.ch/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+        url: 'http://localhost:8080/camera',
       }).success(function(data){
-        console.log('http request done');
-        return data;
+        console.log(data.data);
+        $scope.image = data.data;
+        return data.data;
       }).error(function(){
         alert("Error");
         return null ;
       });
     }
   }
+})
+
+.controller('AddCtrl', function($scope) {
+  $scope.others = [
+    { title: 'Door', subtitle: 'Bedroom', id: 1 },
+    { title: 'Door', subtitle: 'Living room', id: 2},
+    { title: 'Stove', subtitle: 'Kitchen', id: 3 },
+    { title: 'Drawer', subtitle: 'Kitchen', id: 4 }
+  ];
+})
+
+.controller('RemoveCtrl', function($scope) {
+  $scope.pthers = [
+    { title: 'Door', subtitle: 'Bedroom', id: 1 },
+    { title: 'Door', subtitle: 'Living room', id: 2},
+    { title: 'Stove', subtitle: 'Kitchen', id: 3 },
+    { title: 'Drawer', subtitle: 'Kitchen', id: 4 }
+  ];
 });

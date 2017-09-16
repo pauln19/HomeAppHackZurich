@@ -59,6 +59,26 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         controller: 'ObjectCtrl'
       }
     }
+  })
+
+  .state('app.add', {
+    url: '/add',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/add.html',
+        controller: 'AddCtrl'
+      }
+    }
+  })
+
+  .state('app.remove', {
+    url: '/remove',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/remove.html',
+        controller: 'RemoveCtrl'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/objects');

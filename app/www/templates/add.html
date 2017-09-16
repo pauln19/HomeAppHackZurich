@@ -1,0 +1,11 @@
+<ion-view view-title="Add">
+  <ion-content>
+    <ion-item ng-repeat="object in objects" class="item-thumbnail-left" href="#/app/objects/{{object.id}}">
+      <img src="img/{{object.title}}.png"/>
+      {{object.title}}
+      <a>
+        {{object.subtitle}}
+      </a>
+    </ion-item>
+  </ion-content>
+</ion-view>

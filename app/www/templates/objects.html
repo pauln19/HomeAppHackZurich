@@ -4,8 +4,12 @@
       <ion-item ng-repeat="object in objects" class="item-thumbnail-left" href="#/app/objects/{{object.id}}">
         <img src="img/{{object.title}}.png"/>
         {{object.title}}
+        <a>
+          {{object.subtitle}}
+        </a>
       </ion-item>
-      <button ion-button class="button button-block button-assertive">Add</button>
+      <a class="button button-block button-balanced" href="#/app/add">Add</a>
+      <a class="button button-block button-assertive" href="#/app/remove">Remove</a>
     </ion-list>
   </ion-content>
 </ion-view>

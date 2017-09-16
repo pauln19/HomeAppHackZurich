@@ -58,7 +58,13 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         templateUrl: 'templates/object.html',
         controller: 'ObjectCtrl'
       }
+    },
+    params: {
+      param1: false,
+      param2: false,
+      param3: false
     }
+
   })
 
   .state('app.add', {

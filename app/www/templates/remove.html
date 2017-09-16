@@ -1,11 +1,13 @@
 <ion-view view-title="Remove">
   <ion-content>
-    <ion-item ng-repeat="object in objects" class="item-thumbnail-left" href="#/app/objects/{{object.id}}">
+    <ion-list>
+    <ion-item ng-repeat="object in objects" class="item-thumbnail-left" ng-click="remove(object)" href="#/app/objects">
       <img src="img/{{object.title}}.png"/>
       {{object.title}}
       <a>
         {{object.subtitle}}
       </a>
     </ion-item>
+  </ion-list>
   </ion-content>
 </ion-view>

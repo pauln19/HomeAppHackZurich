@@ -12,8 +12,6 @@ angular.module('starter.controllers', [])
   // Form data for the login modal
   $scope.loginData = {};
 
-  $scope.image = {};
-
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -76,8 +74,8 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('AddCtrl', function($scope) {
-  $scope.others = [
+.controller('AddCtrl', function($scope, $stateParams) {
+  $scope.objects = [
     { title: 'Door', subtitle: 'Bedroom', id: 1 },
     { title: 'Door', subtitle: 'Living room', id: 2},
     { title: 'Stove', subtitle: 'Kitchen', id: 3 },
@@ -85,11 +83,11 @@ angular.module('starter.controllers', [])
   ];
 })
 
-.controller('RemoveCtrl', function($scope) {
-  $scope.pthers = [
-    { title: 'Door', subtitle: 'Bedroom', id: 1 },
-    { title: 'Door', subtitle: 'Living room', id: 2},
-    { title: 'Stove', subtitle: 'Kitchen', id: 3 },
-    { title: 'Drawer', subtitle: 'Kitchen', id: 4 }
-  ];
+.controller('RemoveCtrl', function($scope, $stateParams) {
+
+  $scope.remove = function(item) {
+  var index = $scope.objects.indexOf(item);
+  $scope.bdays.splice(index, 1);
+}
+
 });

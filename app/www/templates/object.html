@@ -1,15 +1,15 @@
 <ion-view view-title="Object">
   <ion-content>
     <ion-list>
-      <ion-toggle ng-model="status0" ng-change="activate(0,status0)" ng-disabled="status1">
+      <ion-toggle checked={{param1}} ng-model="status0" ng-change="activate(0,status0)" ng-disabled="status1">
         <img src="img/{{controls[0].title}}.png" width="40"/>
         {{controls[0].title}}
       </ion-toggle>
-      <ion-toggle ng-model="status1" ng-change="activate(1,status1)" ng-disabled="status0">
+      <ion-toggle checked={{param2}} ng-model="status1" ng-change="activate(1,status1)" ng-disabled="status0">
         <img src="img/{{controls[1].title}}.png" width="40"/>
         {{controls[1].title}}
       </ion-toggle>
-      <ion-toggle ng-model="status2" ng-change="activate(2,status2)">
+      <ion-toggle checked={{param3}} ng-model="status2" ng-change="activate(2,status2)">
         <img src="img/{{controls[2].title}}.png" width="40"/>
         {{controls[2].title}}
       </ion-toggle>

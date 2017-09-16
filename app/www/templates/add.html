@@ -1,5 +1,6 @@
 <ion-view view-title="Add">
   <ion-content>
+    <ion-list>
     <ion-item ng-repeat="object in objects" class="item-thumbnail-left" href="#/app/objects/{{object.id}}">
       <img src="img/{{object.title}}.png"/>
       {{object.title}}
@@ -7,5 +8,6 @@
         {{object.subtitle}}
       </a>
     </ion-item>
+  </ion-list>
   </ion-content>
 </ion-view>

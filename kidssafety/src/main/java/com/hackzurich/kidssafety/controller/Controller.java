@@ -59,7 +59,7 @@ public class Controller {
     // take an image of the front door
     @RequestMapping("/camera")
     public BufferedImage show_image() {
-        BufferedImage image = homeApp.get_image();
+        BufferedImage image = homeApp.getImage();
         return image;
     }
 

@@ -11,10 +11,10 @@ public class Device {
     private String name;
 
     private String type;
-    private boolean state;
+    private int state;
     private boolean childSecurityEnabled;
 
-    public Device(String id, String name, String type, boolean state, boolean childSecurityEnabled, boolean elderlySecurityEnabled) {
+    public Device(String id, String name, String type, int state, boolean childSecurityEnabled, boolean elderlySecurityEnabled) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -50,11 +50,22 @@ public class Device {
         this.type = type;
     }
 
-    public boolean isState() {
+    public int isState() {
         return state;
     }
 
-    public void setState(boolean state) {
+    @Override
+    public String toString() {
+        return "Device{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", state=" + state +
+                ", childSecurityEnabled=" + childSecurityEnabled +
+                '}';
+    }
+
+    public void setState(int state) {
         this.state = state;
     }
 

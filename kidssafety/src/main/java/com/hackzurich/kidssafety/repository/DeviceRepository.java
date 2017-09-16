@@ -16,4 +16,7 @@ public interface DeviceRepository extends CrudRepository<Device, String>{
     @Modifying
     @Query("update childSecurityEnabled set childSecurityEnabled = :childSecurityEnabled where id = :id")
     int setChildSecurityEnabled(@Param("childSecurityEnabled") boolean childSecurityEnabled, @Param("id") String id);
+
+    @Query("select Device device where id = :id")
+    Device getDevice(@Param("id") String id);
 }

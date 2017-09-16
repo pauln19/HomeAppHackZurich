@@ -65,7 +65,7 @@ angular.module('starter.controllers', [])
       case 0:
         return $http({
           method: 'GET',
-          url: 'http://localhost:8080/edit?identifier=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+          url: 'http://172.31.0.191/edit?identifier=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
         }).success(function(data){
           console.log(data.data);
           $scope.data = data.data;
@@ -79,7 +79,7 @@ angular.module('starter.controllers', [])
       case 1:
         return $http({
           method: 'GET',
-          url: 'http://localhost:8080/edit?identifier=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+          url: 'http://172.31.0.191/edit?identifier=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
         }).success(function(data){
           console.log(data.data);
           $scope.data = data.data;
@@ -124,7 +124,7 @@ angular.module('starter.controllers', [])
 .controller('AddCtrl', function($scope, $stateParams, Objects, $http) {
   $scope.add = function(selection, subselection) {
     Objects.add(selection, subselection);
-    
+
     switch (selection) {
       case Door:
         return $http({

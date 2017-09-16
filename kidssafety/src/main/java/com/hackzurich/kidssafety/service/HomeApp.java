@@ -56,8 +56,8 @@ public class HomeApp {
     public void toggle_servo(BrickServo servo, boolean toggle) {
         short SERVO_NUMBER = 6;
         try {
+            if (toggle) {
             short position = servo.getPosition((short) 6); // ???
-            if (position < 0) {
                 servo.setPosition(SERVO_NUMBER, (short) 8000);
             } else {
                 servo.setPosition(SERVO_NUMBER, (short) -8000);
@@ -98,7 +98,7 @@ public class HomeApp {
                 toggle_servo(servo, toggle);
                 break;
             case "Stove":
-                uid = "abc";
+                uid = "ASc";
                 BrickletRGBLED rgbLedBricklet = new BrickletRGBLED(uid, ipcon);
                 toggle_led(rgbLedBricklet, toggle);
                 break;

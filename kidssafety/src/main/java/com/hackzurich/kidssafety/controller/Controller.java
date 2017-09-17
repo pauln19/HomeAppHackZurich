@@ -42,13 +42,13 @@ public class Controller {
     @RequestMapping("/create")
     public boolean createObject
     (@RequestParam String id, @RequestParam String type, @RequestParam String name) {
-        return homeApp.createObject(id, type, name);
+        return homeApp.createSmartAppliance(id, type, name);
     }
 
     @RequestMapping("/edit")
     public boolean editObject
             (@RequestParam HashMap<String, Object> params) {
-        return homeApp.editObject(params);
+        return homeApp.editSmartAppliance(params);
     }
 
     // take an image of the front door
@@ -59,7 +59,7 @@ public class Controller {
 
     @RequestMapping("/delete")
     public boolean delete(@RequestParam String id) {
-        return homeApp.deleteObject(id);
+        return homeApp.deleteSmartAppliance(id);
     }
 
     @RequestMapping("/all")

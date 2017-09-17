@@ -44,7 +44,7 @@ public class HomeApp {
         return null;
     }
 
-    public boolean createObject(String id, String type, String name) {
+    public boolean createSmartAppliance(String id, String type, String name) {
         try {
             deviceRepository.save
                     (new Device(id, name, type, false, false, false));
@@ -55,20 +55,22 @@ public class HomeApp {
         return false;
     }
 
-    public boolean editObject(HashMap<String, Object> params) {
+    public boolean editSmartAppliance(HashMap<String, Object> params) {
         try {
-            deviceRepository.setPowerEnabled(Boolean.parseBoolean((String) params.get("powerEnabled")), (String) params.get("id"));
-            deviceRepository.setElderlySecurityEnabled(Boolean.parseBoolean((String) params.get("elderlySecurityEnabled")), (String) params.get("id"));
-            deviceRepository.setChildSecurityEnabled(Boolean.parseBoolean((String) params.get("childSecurityEnabled")), (String) params.get("id"));
-
-            toggleSecurity((String) params.get("id"), Boolean.parseBoolean((String) params.get("childSecurityEnabled")));
+            Device device = deviceRepository.getDevice((String) params.get("id"));
+            device.setChildSecurityEnabled(Boolean.parseBoolean((String) params.get("childSecurityEnabled")));
+            device.setElderlySecurityEnabled((Boolean.parseBoolean((String) params.get("elderlySecurityEnabled"))));
+            device.setPowerEnabled(Boolean.parseBoolean((String) params.get("powerEnabled")));
+            toggleChildSecurity(device, Boolean.parseBoolean((String) params.get("childSecurityEnabled")));
+            deviceRepository.save(device);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public boolean deleteObject(String id) {
+    public boolean deleteSmartAppliance(String id) {
         try {
             deviceRepository.delete(id);
             return true;
@@ -80,7 +82,7 @@ public class HomeApp {
     }
 
 
-    public Device getObject(String id) {
+    public Device getSmartAppliance(String id) {
         return deviceRepository.getDevice(id);
     }
 
@@ -128,12 +130,11 @@ public class HomeApp {
         }
     }
 
-    public void toggleSecurity(String id, boolean toggle) {
+    public void toggleChildSecurity(Device device, boolean toggle) {
 
         String uid;
         BrickServo servo;
         try {
-            Device device = deviceRepository.getDevice(id);
             switch (device.getType()) {
                 case "entrance":
                     uid = "6Rrbr9";

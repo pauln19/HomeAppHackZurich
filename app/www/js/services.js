@@ -21,8 +21,12 @@ angular.module('starter.services', [])
         console.log(newObject);
         objects.push(newObject);
       },
-      remove: function(object) {
-        objects.splice(chats.indexOf(object), 1);
+      remove: function(id) {
+        for (var i = 0; i < objects.length; i++) {
+          if (objects[i].id === parseInt(id)) {
+            objects.splice(objects.indexOf(objects[i]), 1);
+          }
+        }
       },
       get: function(id) {
         for (var i = 0; i < objects.length; i++) {

@@ -41,7 +41,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ObjectsCtrl', function($scope, Objects) {
+.controller('ObjectsCtrl', function($scope, $stateParams, Objects) {
   $scope.objects = Objects.all();
 
   $scope.object = Objects.object;
@@ -50,19 +50,22 @@ angular.module('starter.controllers', [])
     $scope.objectId = id;
     $scope.controls = Objects.getControls(id);
     console.log($scope.controls);
+    console.log($stateParams);
     return null;
   }
 })
 
 .controller('ObjectCtrl', function($scope, $stateParams, $http, Objects) {
 
-  $scope.activate = function(id2,status){
-    Objects.editControls(Objects.object.id,id2);
-    var p = Objects.object.power.toString();
-    var e = Objects.object.elderProtection.toString();
-    var c = Objects.object.childProtection.toString();
-    switch (id2) {
-      case 0:
+  $scope.activate = function(id2,stat){
+    Objects.editControls($stateParams.objectId,id2);
+    var obj = Objects.get($stateParams.objectId);
+    var p = obj.power.toString();
+    var e = obj.elderProtection.toString();
+    var c = obj.childProtection.toString();
+    console.log(obj.title);
+    switch (obj.title) {
+      case Door:
         return $http({
           method: 'GET',
           url: 'http://172.31.0.191:8080/edit?id=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
@@ -76,20 +79,7 @@ angular.module('starter.controllers', [])
         });
         break;
 
-      case 1:
-        return $http({
-          method: 'GET',
-          url: 'http://172.31.0.191:8080/edit?id=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
-        }).success(function(data){
-          console.log(data.data);
-          $scope.data = data.data;
-          return data.data;
-        }).error(function(){
-          alert("Error");
-          return null;
-        });
-        break;
-      case 2:
+      case Stove:
         return $http({
           method: 'GET',
           url: 'http://172.31.0.191:8080/edit?id=ASc&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
@@ -103,19 +93,19 @@ angular.module('starter.controllers', [])
         });
         break;
 
-        case 3:
-          return $http({
-            method: 'GET',
-            url: 'http://172.31.0.191:8080/edit?id=vS3&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
-          }).success(function(data){
-            console.log(data.data);
-            $scope.data = data.data;
-            return data.data;
-          }).error(function(){
-            alert("Error");
-            return null;
-          });
-          break;
+      case Drawer:
+        return $http({
+          method: 'GET',
+          url: 'http://172.31.0.191:8080/edit?id=vS3&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
+        }).success(function(data){
+          console.log(data.data);
+          $scope.data = data.data;
+          return data.data;
+        }).error(function(){
+          alert("Error");
+          return null;
+        });
+        break;
 
     }
   }
@@ -171,10 +161,11 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('RemoveCtrl', function($scope, $stateParams) {
+.controller('RemoveCtrl', function($scope, $stateParams, Objects, $http) {
 
+  $scope.objects = Objects.all();
   $scope.remove = function(item) {
-  Objects.remove(item);
+  Objects.remove(item.id);
 
   switch (item.title) {
     case 'Door':

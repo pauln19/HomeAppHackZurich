@@ -44,14 +44,15 @@ public class HomeApp {
         return null;
     }
 
-    public boolean createObject(String identifier, String type, String name) {
+    public boolean createObject(String id, String type, String name) {
         try {
             deviceRepository.save
-                    (new Device(identifier, name, type, false, false, false));
+                    (new Device(id, name, type, false, false, false));
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
-        } return false;
+        }
+        return false;
     }
 
     public boolean editObject(HashMap<String, Object> params) {
@@ -63,7 +64,8 @@ public class HomeApp {
             toggleSecurity((String) params.get("id"), Boolean.parseBoolean((String) params.get("childSecurityEnabled")));
         } catch (Exception e) {
             e.printStackTrace();
-        } return false;
+        }
+        return false;
     }
 
     public boolean deleteObject(String id) {
@@ -78,8 +80,8 @@ public class HomeApp {
     }
 
 
-    public Device getObject(String identifier) {
-        return deviceRepository.getDevice(identifier);
+    public Device getObject(String id) {
+        return deviceRepository.getDevice(id);
     }
 
     public IPConnection getIpcon() {
@@ -126,36 +128,39 @@ public class HomeApp {
         }
     }
 
-    public void toggleSecurity(String identifier, boolean toggle) {
+    public void toggleSecurity(String id, boolean toggle) {
 
         String uid;
         BrickServo servo;
-        Device device = getObject(identifier);
+        try {
+            Device device = deviceRepository.getDevice(id);
+            switch (device.getType()) {
+                case "entrance":
+                    uid = "6Rrbr9";
+                    servo = new BrickServo(uid, ipcon);
+                    toggle_servo_block(servo, toggle);
+                    break;
+                case "door":
+                    uid = "6Rrbr9";
+                    servo = new BrickServo(uid, ipcon);
+                    toggle_servo_block(servo, toggle);
+                    break;
+                case "drawer":
+                    uid = "6Rrbr9";
+                    servo = new BrickServo(uid, ipcon);
+                    toggle_servo(servo, toggle);
+                    break;
+                case "stove":
+                    uid = "ASc";
+                    BrickletRGBLED rgbLedBricklet = new BrickletRGBLED(uid, ipcon);
 
-        switch (device.getType()) {
-            case "entrance":
-                uid = "6Rrbr9";
-                servo = new BrickServo(uid, ipcon);
-                toggle_servo_block(servo, toggle);
-                break;
-            case "door":
-                uid = "6Rrbr9";
-                servo = new BrickServo(uid, ipcon);
-                toggle_servo_block(servo, toggle);
-                break;
-            case "drawer":
-                uid = "6Rrbr9";
-                servo = new BrickServo(uid, ipcon);
-                toggle_servo(servo, toggle);
-                break;
-            case "stove":
-                uid = "ASc";
-                BrickletRGBLED rgbLedBricklet = new BrickletRGBLED(uid, ipcon);
-
-                toggle_led(rgbLedBricklet, toggle);
-                break;
-            default:
-                break;
+                    toggle_led(rgbLedBricklet, toggle);
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }

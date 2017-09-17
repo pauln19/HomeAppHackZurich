@@ -41,8 +41,26 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ObjectsCtrl', function($scope, $stateParams, Objects) {
+.controller('ObjectsCtrl', function($scope, $stateParams, Objects, $http) {
   $scope.objects = Objects.all();
+
+  function serverObjects() {
+    return $http({
+      method: 'GET',
+      url: 'http://172.31.0.191:8080/all',
+    }).success(function(data){
+      console.log(data.data);
+      $scope.data = data.data;
+      return data.data;
+    }).error(function(){
+      alert("Error");
+      return null;
+    });
+  }
+
+  $scope.serverObjects = serverObjects();
+
+  console.log($scope.serverObjects);
 
   $scope.object = Objects.object;
 
@@ -65,7 +83,7 @@ angular.module('starter.controllers', [])
     var c = obj.childProtection.toString();
     console.log(obj.title);
     switch (obj.title) {
-      case Door:
+      case 'Door':
         return $http({
           method: 'GET',
           url: 'http://172.31.0.191:8080/edit?id=6Rrbr9&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
@@ -79,7 +97,7 @@ angular.module('starter.controllers', [])
         });
         break;
 
-      case Stove:
+      case 'Stove':
         return $http({
           method: 'GET',
           url: 'http://172.31.0.191:8080/edit?id=ASc&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,
@@ -93,7 +111,7 @@ angular.module('starter.controllers', [])
         });
         break;
 
-      case Drawer:
+      case 'Drawer':
         return $http({
           method: 'GET',
           url: 'http://172.31.0.191:8080/edit?id=vS3&powerEnabled='+p+'&elderlySecurityEnabled='+e+'&childSecurityEnabled='+c,

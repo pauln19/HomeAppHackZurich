@@ -3,6 +3,7 @@ package com.hackzurich.kidssafety.service;
 import com.hackzurich.kidssafety.model.Device;
 import com.hackzurich.kidssafety.repository.DeviceRepository;
 import com.hackzurich.kidssafety.tinkerforge.BrickServo;
+import com.hackzurich.kidssafety.tinkerforge.BrickletDualButton;
 import com.hackzurich.kidssafety.tinkerforge.BrickletRGBLED;
 import com.hackzurich.kidssafety.tinkerforge.IPConnection;
 import com.hopding.jrpicam.RPiCamera;
@@ -147,8 +148,16 @@ public class HomeApp {
                     toggle_servo_block(servo, toggle);
                     break;
                 case "drawer":
-                    uid = "6Rrbr9";
+                    uid = "vS3";
                     servo = new BrickServo(uid, ipcon);
+                    BrickletDualButton dualButton = new BrickletDualButton(uid, ipcon);
+                    BrickletDualButton.LEDState ledState = dualButton.getLEDState();
+                    if (ledState.ledR == BrickletDualButton.LED_STATE_ON) {
+                        dualButton.setLEDState(BrickletDualButton.LED_STATE_OFF, BrickletDualButton.LED_STATE_OFF);
+                    }
+                    else {
+                        dualButton.setLEDState(BrickletDualButton.LED_STATE_OFF, BrickletDualButton.LED_STATE_ON);
+                    }
                     toggle_servo(servo, toggle);
                     break;
                 case "stove":

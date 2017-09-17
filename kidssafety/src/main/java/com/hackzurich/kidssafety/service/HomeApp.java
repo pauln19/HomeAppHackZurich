@@ -44,12 +44,17 @@ public class HomeApp {
         return null;
     }
 
-    public void createObject(String identifier, String type, String name) {
-        deviceRepository.save
-                (new Device(identifier, name, type, false, false, false));
+    public boolean createObject(String identifier, String type, String name) {
+        try {
+            deviceRepository.save
+                    (new Device(identifier, name, type, false, false, false));
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } return false;
     }
 
-    public void editObject(HashMap<String, Object> params) {
+    public boolean editObject(HashMap<String, Object> params) {
         try {
             deviceRepository.setPowerEnabled(Boolean.parseBoolean((String) params.get("powerEnabled")), (String) params.get("id"));
             deviceRepository.setElderlySecurityEnabled(Boolean.parseBoolean((String) params.get("elderlySecurityEnabled")), (String) params.get("id"));
@@ -58,7 +63,7 @@ public class HomeApp {
             toggleSecurity((String) params.get("id"), Boolean.parseBoolean((String) params.get("childSecurityEnabled")));
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        } return false;
     }
 
     public boolean deleteObject(String id) {
@@ -67,7 +72,8 @@ public class HomeApp {
             return true;
         } catch (Exception e) {
             e.printStackTrace();
-        } return false;
+        }
+        return false;
 
     }
 

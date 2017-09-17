@@ -40,17 +40,15 @@ public class Controller {
 
     // create new object
     @RequestMapping("/create")
-    public Iterable<Device> createObject
+    public boolean createObject
     (@RequestParam String id, @RequestParam String type, @RequestParam String name) {
-        homeApp.createObject(id, type, name);
-        return deviceRepository.findAll();
+        return homeApp.createObject(id, type, name);
     }
 
     @RequestMapping("/edit")
-    public Iterable<Device> editObject
+    public boolean editObject
             (@RequestParam HashMap<String, Object> params) {
-        homeApp.editObject(params);
-        return deviceRepository.findAll();
+        return homeApp.editObject(params);
     }
 
     // take an image of the front door
@@ -62,6 +60,11 @@ public class Controller {
     @RequestMapping("/delete")
     public boolean delete(@RequestParam String id) {
         return homeApp.deleteObject(id);
+    }
+
+    @RequestMapping("/all")
+    public Iterable<Device> getAllDevices() {
+        return deviceRepository.findAll();
     }
 
 }
